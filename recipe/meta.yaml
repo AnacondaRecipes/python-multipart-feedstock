@@ -1,5 +1,5 @@
 {% set name = "python-multipart" %}
-{% set version = "0.0.6" %}
+{% set version = "0.0.9" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/python_multipart/python_multipart-{{ version }}.tar.gz
-  sha256: e9925a80bb668529f1b67c7fdb0a5dacdd7cbfc6fb0bff3ea443fe22bdd62132
+  sha256: 03f54688c663f1b7977105f021043b0793151e4cb1c1a9d4a11fc13d622c4026
 
 build:
   number: 0
@@ -28,13 +28,17 @@ test:
     - pip
   commands:
     - pip check
+  downstreams:
+    - starlette-full
+    - lightning
+    - lightning-cloud
 
 about:
   home: https://github.com/andrew-d/python-multipart
   license: Apache-2.0
   license_family: Apache
   license_file: LICENSE.txt
-  summary: 'A streaming multipart parser for Python.'
+  summary: A streaming multipart parser for Python.
   description: |
     python-multipart is an Apache2 licensed streaming multipart parser for Python.
     It's still under some development, but test coverage is currently 100%.
