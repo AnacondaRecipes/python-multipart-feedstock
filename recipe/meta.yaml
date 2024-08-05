@@ -30,7 +30,9 @@ test:
     - pip check
   downstreams:
     - starlette-full
-    - lightning
+    # Skip py<312 on win because of incompatible pydantic version:
+    # "TypeError: ForwardRef._evaluate() missing 1 required keyword-only argument: 'recursive_guard'"
+    - lightning  # [py<312 and win]
     - lightning-cloud
 
 about:
