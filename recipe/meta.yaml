@@ -28,12 +28,6 @@ test:
     - pip
   commands:
     - pip check
-  # downstreams:
-  #   - starlette-full
-  #   # Skip py<312 because of incompatible pydantic version:
-  #   # "TypeError: ForwardRef._evaluate() missing 1 required keyword-only argument: 'recursive_guard'"
-  #   - lightning  # [py<312]
-  #   - lightning-cloud
 
 about:
   home: https://github.com/Kludex/python-multipart
