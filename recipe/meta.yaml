@@ -1,23 +1,24 @@
 {% set name = "python-multipart" %}
-{% set version = "0.0.20" %}
+{% set version = "0.0.18" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/python_multipart/python_multipart-{{ version }}.tar.gz
-  sha256: 8dd0cab45b8e23064ae09147625994d090fa46f5b0d1e13af944c331a7fa9d13
+  url: https://pypi.org/packages/source/{{ name[0] }}/python_multipart/python_multipart-{{ version }}.tar.gz
+  sha256: 7a68db60c8bfb82e460637fa4750727b45af1d5e2ed215593f917f64694d34fe
 
 build:
   number: 0
+  skip: true  # [py<38]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
-    - hatchling
-    - python
     - pip
+    - python
+    - hatchling
   run:
     - python
 
