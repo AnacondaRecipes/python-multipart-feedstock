@@ -48,7 +48,7 @@ about:
   summary: A streaming multipart parser for Python.
   description: |
     python-multipart is an Apache2 licensed streaming multipart parser for Python.
-  doc_url: https://kludex.github.io/python-multipart
+  doc_url: https://multipart.fastapiexpert.com
   dev_url: https://github.com/Kludex/python-multipart
 
 extra:
