@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/python_multipart/python_multipart-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/python_multipart/{{ name.replace('-','_') }}-{{ version }}.tar.gz
   sha256: 7340bef99a7e0032613f56dc36027b959fd3b30a787ed62d310e951f7c3a3a58
 
 build:
@@ -23,12 +23,17 @@ requirements:
     - python
 
 test:
+  source_files:
+    - tests
   imports:
     - multipart
   requires:
     - pip
+    - pytest >=8.1.1
+    - pyyaml >=6.0.1
   commands:
     - pip check
+    - pytest -vv tests
 
 about:
   home: https://github.com/Kludex/python-multipart
@@ -38,7 +43,7 @@ about:
   summary: A streaming multipart parser for Python.
   description: |
     python-multipart is an Apache2 licensed streaming multipart parser for Python.
-  doc_url: https://kludex.github.io/python-multipart/
+  doc_url: https://kludex.github.io/python-multipart
   dev_url: https://github.com/Kludex/python-multipart
 
 extra:
