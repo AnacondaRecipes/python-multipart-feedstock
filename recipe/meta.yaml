@@ -33,6 +33,8 @@ test:
     - pyyaml >=6.0.1
   commands:
     - pip check
+    - set PYTHONUTF8=1              # [win]
+    - set PYTHONIOENCODING="UTF-8"  # [win]
     - pytest -vv tests
 
 about:
