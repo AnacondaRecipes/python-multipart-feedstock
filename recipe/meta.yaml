@@ -25,8 +25,8 @@ requirements:
 {% set deselect_tests = "" %}
 # Randomly failing on CI
 # E   UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe2 in position 7: invalid continuation byte
-{% set deselect_tests = " --deselect=tests/test_multipart.py::TestFormParser::test_request_body_fuzz" %}  # [win]
-
+# E   ValueError: the environment variable is longer than 32767 characters
+{% set deselect_tests = " --deselect=tests/test_multipart.py::TestFormParser::test_request_body_fuzz --deselect=tests/test_multipart.py::TestFormParser::test_multipart_parser_preamble_before_first_boundary" %}  # [win]
 test:
   source_files:
     - tests
