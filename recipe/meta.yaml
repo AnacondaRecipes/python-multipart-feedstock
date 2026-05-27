@@ -34,8 +34,8 @@ test:
     - multipart
   requires:
     - pip
-    - pytest >=8.1.1
-    - pyyaml >=6.0.1
+    - pytest >=9.0.3
+    - pyyaml >=6.0.3
   commands:
     - pip check
     - pytest -vv tests {{ deselect_tests }}
