@@ -1,5 +1,5 @@
 {% set name = "python-multipart" %}
-{% set version = "0.0.22" %}
+{% set version = "0.0.29" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/python_multipart/{{ name.replace('-','_') }}-{{ version }}.tar.gz
-  sha256: 7340bef99a7e0032613f56dc36027b959fd3b30a787ed62d310e951f7c3a3a58
+  sha256: 643e93849196645e2dbdd81a0f8829a23123ad7f797a84a364c6fb3563f18904
 
 build:
   number: 0
@@ -25,8 +25,8 @@ requirements:
 {% set deselect_tests = "" %}
 # Randomly failing on CI
 # E   UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe2 in position 7: invalid continuation byte
-{% set deselect_tests = " --deselect=tests/test_multipart.py::TestFormParser::test_request_body_fuzz" %}  # [win]
-
+# E   ValueError: the environment variable is longer than 32767 characters
+{% set deselect_tests = " --deselect=tests/test_multipart.py::TestFormParser::test_request_body_fuzz --deselect=tests/test_multipart.py::TestFormParser::test_multipart_parser_preamble_before_first_boundary" %}  # [win]
 test:
   source_files:
     - tests
@@ -34,8 +34,8 @@ test:
     - multipart
   requires:
     - pip
-    - pytest >=8.1.1
-    - pyyaml >=6.0.1
+    - pytest >=9.0.3
+    - pyyaml >=6.0.3
   commands:
     - pip check
     - pytest -vv tests {{ deselect_tests }}
