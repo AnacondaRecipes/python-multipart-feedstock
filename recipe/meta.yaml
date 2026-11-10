@@ -1,18 +1,23 @@
 {% set name = "python-multipart" %}
-{% set version = "0.0.32" %}
+{% set version = "0.0.33" %}
+{% set deselect_tests = "" %}
+{% set deselect_tests = " --deselect=tests/test_multipart.py::TestFormParser::test_request_body_fuzz --deselect=tests/test_multipart.py::TestFormParser::test_multipart_parser_preamble_before_first_boundary" %}  # [win]
 
+# Randomly failing on CI
+# E   UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe2 in position 7: invalid continuation byte
+# E   ValueError: the environment variable is longer than 32767 characters
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/python_multipart/{{ name.replace('-','_') }}-{{ version }}.tar.gz
-  sha256: be54b7f3fa167bb83e4fcd936b887b708f4e57fe75911c02aebf53efaf8d938e
+  sha256: b8112424a6abd162ec08d390565dd113ad699f2fe6fef3c987b8bbcbfe9e390d
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  skip: true  # [py<310]
+  skip: true  # [py<311]
 
 requirements:
   host:
@@ -22,11 +27,6 @@ requirements:
   run:
     - python
 
-{% set deselect_tests = "" %}
-# Randomly failing on CI
-# E   UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe2 in position 7: invalid continuation byte
-# E   ValueError: the environment variable is longer than 32767 characters
-{% set deselect_tests = " --deselect=tests/test_multipart.py::TestFormParser::test_request_body_fuzz --deselect=tests/test_multipart.py::TestFormParser::test_multipart_parser_preamble_before_first_boundary" %}  # [win]
 test:
   source_files:
     - tests
