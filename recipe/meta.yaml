@@ -1,18 +1,19 @@
 {% set name = "python-multipart" %}
-{% set version = "0.0.32" %}
+{% set version = "0.0.34" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/python_multipart/{{ name.replace('-','_') }}-{{ version }}.tar.gz
-  sha256: be54b7f3fa167bb83e4fcd936b887b708f4e57fe75911c02aebf53efaf8d938e
+  sha256: b998ae90ca6e1e363261ce2e0e230281b8af53867b757970abd69ee9edcd843a
 
 build:
   number: 0
+  # upstream requires-python >=3.11 (3.10 support dropped in 0.0.33)
+  skip: true  # [py<311]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  skip: true  # [py<310]
 
 requirements:
   host:
@@ -32,6 +33,7 @@ test:
     - tests
   imports:
     - multipart
+    - python_multipart
   requires:
     - pip
     - pytest >=9.0.3
